@@ -12,8 +12,4 @@ public interface WalletService {
     List<Wallet> getWalletsByPhoneNumber(String phoneNumber);
 
     WalletDto getWalletById(Long id);
-
-    void moneyOperation(String phoneNumber, TypeEnum operationEnum, BigDecimal amount);
-
-    WalletDto moneyOperationTransaction(TypeEnum operationEnum, TransferDto transferInformation);
 }

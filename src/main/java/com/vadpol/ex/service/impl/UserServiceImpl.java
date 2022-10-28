@@ -2,8 +2,8 @@ package com.vadpol.ex.service.impl;
 
 import com.vadpol.ex.dto.UserDto;
 import com.vadpol.ex.entity.*;
-import com.vadpol.ex.exceptions.NonUniqueUser;
-import com.vadpol.ex.mapper.MapperConfig;
+import com.vadpol.ex.exceptions.UserAlreadyExistsException;
+import com.vadpol.ex.config.MapperConfig;
 import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.UserRepository;
 import com.vadpol.ex.repository.WalletRepository;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByPhoneNumber(userDto.getPhoneNumber());
 
         if(Objects.nonNull(user)){
-            throw new NonUniqueUser();
+            throw new UserAlreadyExistsException();
         }
 
          user = userRepository.save(mapperConfig.map(userDto, User.class));

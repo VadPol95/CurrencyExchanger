@@ -4,6 +4,7 @@ import com.vadpol.ex.dto.TransferDto;
 import com.vadpol.ex.dto.WalletDto;
 import com.vadpol.ex.entity.TypeEnum;
 import com.vadpol.ex.entity.Wallet;
+import com.vadpol.ex.service.MoneyOperationService;
 import com.vadpol.ex.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.List;
 public class WalletController {
 
     private final WalletService walletService;
+    private final MoneyOperationService operationService;
 
     @GetMapping("wallet/{phoneNumber}")
     public List<Wallet> getWalletByPhoneNumber(String phoneNumber){
@@ -34,12 +36,12 @@ public class WalletController {
 
     @PostMapping("/wallet/get")
     public WalletDto getMoney(@RequestBody TransferDto transferDto) {
-        return walletService.moneyOperationTransaction(TypeEnum.GET, transferDto);
+        return operationService.moneyOperationTransaction(TypeEnum.GET, transferDto);
     }
 
     @PostMapping("/wallet/put")
     public WalletDto putMoney(@RequestBody TransferDto transferDto) {
-        return walletService.moneyOperationTransaction(TypeEnum.PUT, transferDto);
+        return operationService.moneyOperationTransaction(TypeEnum.PUT, transferDto);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.vadpol.ex.controller;
 
 import com.vadpol.ex.exceptions.AmountNotFoundException;
-import com.vadpol.ex.exceptions.NonUniqueUser;
+import com.vadpol.ex.exceptions.UserAlreadyExistsException;
 import com.vadpol.ex.exceptions.NotEnoughtMoneyException;
 import com.vadpol.ex.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = {
-            NonUniqueUser.class})
+            UserAlreadyExistsException.class})
     public ResponseEntity<?> handleNonUniqueUserException(Exception ex) {
         return new ResponseEntity("A user with the same name already exists in the system", HttpStatus.BAD_REQUEST);
 
@@ -28,21 +28,21 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = {
             UserNotFoundException.class})
     public ResponseEntity<?> handleUserNotFoundException(Exception ex) {
-        return new ResponseEntity("Пользователя нет в системе", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("User is not in the system", HttpStatus.BAD_REQUEST);
 
     }
 
     @ExceptionHandler(value = {
             AmountNotFoundException.class})
     public ResponseEntity<?> handleAmountNotFoundException(Exception ex) {
-        return new ResponseEntity("Вы ввели не корректные данные ....", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("You entered incorrect data ....", HttpStatus.BAD_REQUEST);
 
     }
 
     @ExceptionHandler(value = {
             NotEnoughtMoneyException.class})
     public ResponseEntity<?> handleMoneyException(Exception ex) {
-        return new ResponseEntity("Денег нет, но вы держитесь ....", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity("No money no honey ...)", HttpStatus.BAD_REQUEST);
 
     }
 }

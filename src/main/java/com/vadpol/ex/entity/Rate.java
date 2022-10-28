@@ -20,9 +20,12 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
+    @Column(name = "currency")
     CurrencyEnum currency;
+    @Column(name = "sale")
     BigDecimal sale;
+    @Column(name = "buy")
     BigDecimal buy;
+    @Column(name = "receive")
     Timestamp receive;
 }

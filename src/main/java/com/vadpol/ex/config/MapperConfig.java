@@ -1,4 +1,4 @@
-package com.vadpol.ex.mapper;
+package com.vadpol.ex.config;
 
 import com.vadpol.ex.dto.UserDto;
 import com.vadpol.ex.dto.WalletDto;

@@ -1,8 +1,7 @@
 package com.vadpol.ex.entity;
 
 public enum TypeEnum {
-    REGISTRATION ,
-    EXCHANGE,
+    REGISTRATION,
     PUT,
     GET,
     RATE;
