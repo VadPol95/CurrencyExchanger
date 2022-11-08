@@ -3,7 +3,7 @@ package com.vadpol.ex.service.impl;
 import com.vadpol.ex.dto.WalletDto;
 import com.vadpol.ex.entity.User;
 import com.vadpol.ex.entity.Wallet;
-import com.vadpol.ex.exceptions.AmountNotFoundException;
+import com.vadpol.ex.exceptions.WalletNotFoundException;
 import com.vadpol.ex.exceptions.UserNotFoundException;
 import com.vadpol.ex.config.MapperConfig;
 import com.vadpol.ex.repository.UserRepository;
@@ -39,7 +39,7 @@ public class WalletServiceImpl implements WalletService {
     public WalletDto getWalletById(Long id) {
         return walletRepository.findById(id)
                 .map(wallet -> mapperConfig.map(wallet, WalletDto.class))
-                .orElseThrow(AmountNotFoundException::new);
+                .orElseThrow(WalletNotFoundException::new);
     }
 }
 

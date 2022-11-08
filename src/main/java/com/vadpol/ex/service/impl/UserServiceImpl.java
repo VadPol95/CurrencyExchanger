@@ -36,13 +36,13 @@ public class UserServiceImpl implements UserService {
          user = userRepository.save(mapperConfig.map(userDto, User.class));
 
         Wallet walletUSD = new Wallet()
-                .setCurrency(CurrencyEnum.USD)
+                .setCurrency(CurrencyType.USD)
                 .setUser(user)
                 .setAmmount(BigDecimal.ZERO)
                 .setLastUpdate(new Timestamp(System.currentTimeMillis()));
 
         Wallet walletUAH = new Wallet()
-                .setCurrency(CurrencyEnum.UAH)
+                .setCurrency(CurrencyType.UAH)
                 .setUser(user)
                 .setAmmount(BigDecimal.ZERO)
                 .setLastUpdate(new Timestamp(System.currentTimeMillis()));

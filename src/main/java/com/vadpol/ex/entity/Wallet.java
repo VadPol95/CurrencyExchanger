@@ -15,7 +15,7 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private CurrencyEnum currency;
+    private CurrencyType currency;
 
     private Timestamp lastUpdate;
 

@@ -6,7 +6,7 @@ import com.vadpol.ex.dto.WalletDto;
 import com.vadpol.ex.entity.Notification;
 import com.vadpol.ex.entity.TypeEnum;
 import com.vadpol.ex.entity.Wallet;
-import com.vadpol.ex.exceptions.AmountNotFoundException;
+import com.vadpol.ex.exceptions.WalletNotFoundException;
 import com.vadpol.ex.exceptions.NotEnoughtMoneyException;
 import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.WalletRepository;
@@ -28,7 +28,7 @@ public class MoneyOperationServiceImpl implements MoneyOperationService {
         Optional<Wallet> walletOpt = walletRepository.findById(transferInformation.getId());
 
         if (walletOpt.isEmpty()) {
-            throw new AmountNotFoundException();
+            throw new WalletNotFoundException();
         }
 
         Wallet wallet = walletOpt.get();

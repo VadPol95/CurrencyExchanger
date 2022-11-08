@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 @Data
 @Accessors(chain = true)
 public class TransferDto {
-    long id;
-    BigDecimal amount;
+    private long id;
+    private BigDecimal amount;
 }

@@ -1,9 +1,9 @@
-package com.vadpol.ex.util.data;
+package com.vadpol.ex.job;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vadpol.ex.entity.CurrencyEnum;
+import com.vadpol.ex.entity.CurrencyType;
 import com.vadpol.ex.entity.Notification;
 import com.vadpol.ex.entity.Rate;
 import com.vadpol.ex.entity.TypeEnum;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -55,7 +54,7 @@ public class CurrentRatesUpdateJob {
         actualObj.forEach(c -> {
             if (c.get("ccy").asText().equals("USD")) {
                 Rate rate = new Rate()
-                        .setCurrency(CurrencyEnum.valueOf(c.get("ccy").asText()))
+                        .setCurrency(CurrencyType.valueOf(c.get("ccy").asText()))
                         .setBuy(BigDecimal.valueOf(Double.parseDouble(c.get("buy").asText())))
                         .setSale(BigDecimal.valueOf(Double.parseDouble(c.get("sale").asText())))
                         .setReceive(new Timestamp(System.currentTimeMillis()));

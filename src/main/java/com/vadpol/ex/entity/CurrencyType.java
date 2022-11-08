@@ -1,5 +1,5 @@
 package com.vadpol.ex.entity;
 
-public enum CurrencyEnum {
+public enum CurrencyType {
     USD, UAH
 }

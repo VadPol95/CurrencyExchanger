@@ -26,16 +26,16 @@ public class ExchangeServiceImpl implements ExchangeService {
 
 
     @Override
-    public void exchange(String phoneNumber, CurrencyEnum currency, BigDecimal amount) {
+    public void exchange(String phoneNumber, CurrencyType currency, BigDecimal amount) {
         List<Wallet> walletList = walletService.getWalletsByPhoneNumber(phoneNumber);
 
-        Wallet wUAH = walletList.stream().filter(w -> w.getCurrency().equals(CurrencyEnum.UAH)).findFirst().get();
-        Wallet wUSD = walletList.stream().filter(w -> w.getCurrency().equals(CurrencyEnum.USD)).findFirst().get();
+        Wallet wUAH = walletList.stream().filter(w -> w.getCurrency().equals(CurrencyType.UAH)).findFirst().get();
+        Wallet wUSD = walletList.stream().filter(w -> w.getCurrency().equals(CurrencyType.USD)).findFirst().get();
 
         Rate rate = rateService.getCurrentRate();
 
 
-        if (CurrencyEnum.UAH.equals(currency)) {
+        if (CurrencyType.UAH.equals(currency)) {
             BigDecimal valueUAH = amount.divide(rate.getBuy(), RoundingMode.HALF_UP);
             if (wUSD.getAmmount().compareTo(valueUAH) < 0) {
                 throw new NotEnoughtMoneyException();
@@ -43,7 +43,7 @@ public class ExchangeServiceImpl implements ExchangeService {
             wUAH.setAmmount(wUAH.getAmmount().add(amount));
             wUSD.setAmmount(wUSD.getAmmount().subtract(valueUAH));
 
-        } else if (CurrencyEnum.USD.equals(currency)) {
+        } else if (CurrencyType.USD.equals(currency)) {
             BigDecimal valueUSD = rate.getSale().multiply(amount);
 
             if (wUAH.getAmmount().compareTo(valueUSD) < 0) {

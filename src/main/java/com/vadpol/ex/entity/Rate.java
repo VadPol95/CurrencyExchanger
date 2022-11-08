@@ -21,7 +21,7 @@ public class Rate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column(name = "currency")
-    CurrencyEnum currency;
+    CurrencyType currency;
     @Column(name = "sale")
     BigDecimal sale;
     @Column(name = "buy")

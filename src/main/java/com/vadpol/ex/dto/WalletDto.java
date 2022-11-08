@@ -1,6 +1,6 @@
 package com.vadpol.ex.dto;
 
-import com.vadpol.ex.entity.CurrencyEnum;
+import com.vadpol.ex.entity.CurrencyType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Accessors(chain = true)
 public class WalletDto {
     private Long id;
-    private CurrencyEnum currency;
+    private CurrencyType currency;
     private Timestamp lastUpdate;
     private BigDecimal ammount;
 }

@@ -1,6 +1,6 @@
 package com.vadpol.ex.controller;
 
-import com.vadpol.ex.exceptions.AmountNotFoundException;
+import com.vadpol.ex.exceptions.WalletNotFoundException;
 import com.vadpol.ex.exceptions.UserAlreadyExistsException;
 import com.vadpol.ex.exceptions.NotEnoughtMoneyException;
 import com.vadpol.ex.exceptions.UserNotFoundException;
@@ -33,7 +33,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = {
-            AmountNotFoundException.class})
+            WalletNotFoundException.class})
     public ResponseEntity<?> handleAmountNotFoundException(Exception ex) {
         return new ResponseEntity("You entered incorrect data ....", HttpStatus.BAD_REQUEST);
 

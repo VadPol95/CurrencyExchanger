@@ -29,7 +29,7 @@ public class WalletController {
         return walletService.getWalletsByPhoneNumber(phoneNumber);
     }
 
-    @GetMapping("wallet/ammount/{id}")
+    @GetMapping("wallet/{id}")
     public WalletDto getWalletById(Long id){
         return walletService.getWalletById(id);
     }
