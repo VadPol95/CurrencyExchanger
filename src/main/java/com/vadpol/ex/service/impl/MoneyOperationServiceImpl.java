@@ -11,6 +11,7 @@ import com.vadpol.ex.exceptions.NotEnoughtMoneyException;
 import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.WalletRepository;
 import com.vadpol.ex.service.MoneyOperationService;
+import com.vadpol.ex.util.NotificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MoneyOperationServiceImpl implements MoneyOperationService {
-    private final NotificationRepository notificationRepository;
+//    private final NotificationRepository notificationRepository;
     private final WalletRepository walletRepository;
     private final MapperConfig mapperConfig;
     @Override
@@ -43,7 +44,7 @@ public class MoneyOperationServiceImpl implements MoneyOperationService {
         }
         walletRepository.save(wallet);
 
-        notificationRepository.save(new Notification()
+        NotificationUtil.createNotification(new Notification()
                 .setType(operationEnum)
                 .setId(wallet.getUser().getId())
                 .setContent(transferInformation.getAmount().toPlainString()));

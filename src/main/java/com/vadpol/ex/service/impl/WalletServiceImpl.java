@@ -1,6 +1,7 @@
 package com.vadpol.ex.service.impl;
 
 import com.vadpol.ex.dto.WalletDto;
+import com.vadpol.ex.entity.CurrencyType;
 import com.vadpol.ex.entity.User;
 import com.vadpol.ex.entity.Wallet;
 import com.vadpol.ex.exceptions.WalletNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -8,6 +8,7 @@ import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.UserRepository;
 import com.vadpol.ex.repository.WalletRepository;
 import com.vadpol.ex.service.UserService;
+import com.vadpol.ex.util.NotificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
-    private final NotificationRepository notificationRepository;
+//    private final NotificationRepository notificationRepository;
     private final MapperConfig mapperConfig;
 
     @Override
@@ -55,7 +56,8 @@ public class UserServiceImpl implements UserService {
                 .setUserId(user.getId())
                 .setContent("Create user : " + user);
 
-        notificationRepository.save(not);
+        NotificationUtil.createNotification(not);
+
 
         return user.getId();
     }

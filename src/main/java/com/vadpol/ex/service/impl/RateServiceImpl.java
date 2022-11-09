@@ -13,6 +13,7 @@ import java.util.LinkedList;
 public class RateServiceImpl implements RateService {
     public final RateRepository rateRepository;
 
+    @Override
     public Rate getCurrentRate() {
         LinkedList<Rate> rates = new LinkedList<>(rateRepository.findAll());
         return rates.getLast();
