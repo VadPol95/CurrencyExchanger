@@ -4,11 +4,10 @@ import com.vadpol.ex.dto.UserDto;
 import com.vadpol.ex.entity.*;
 import com.vadpol.ex.exceptions.UserAlreadyExistsException;
 import com.vadpol.ex.config.MapperConfig;
-import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.UserRepository;
 import com.vadpol.ex.repository.WalletRepository;
+import com.vadpol.ex.service.NotificationService;
 import com.vadpol.ex.service.UserService;
-import com.vadpol.ex.util.NotificationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final WalletRepository walletRepository;
-//    private final NotificationRepository notificationRepository;
+    private final NotificationService service;
     private final MapperConfig mapperConfig;
 
     @Override
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService {
                 .setUserId(user.getId())
                 .setContent("Create user : " + user);
 
-        NotificationUtil.createNotification(not);
+        service.createNotification(not);
 
 
         return user.getId();

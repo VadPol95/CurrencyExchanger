@@ -8,10 +8,9 @@ import com.vadpol.ex.entity.TypeEnum;
 import com.vadpol.ex.entity.Wallet;
 import com.vadpol.ex.exceptions.WalletNotFoundException;
 import com.vadpol.ex.exceptions.NotEnoughtMoneyException;
-import com.vadpol.ex.repository.NotificationRepository;
 import com.vadpol.ex.repository.WalletRepository;
 import com.vadpol.ex.service.MoneyOperationService;
-import com.vadpol.ex.util.NotificationUtil;
+import com.vadpol.ex.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +20,10 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MoneyOperationServiceImpl implements MoneyOperationService {
-//    private final NotificationRepository notificationRepository;
+    private final NotificationService service;
     private final WalletRepository walletRepository;
     private final MapperConfig mapperConfig;
+
     @Override
     public WalletDto moneyOperationTransaction(TypeEnum operationEnum, TransferDto transferInformation) {
         Optional<Wallet> walletOpt = walletRepository.findById(transferInformation.getId());
@@ -34,7 +34,7 @@ public class MoneyOperationServiceImpl implements MoneyOperationService {
 
         Wallet wallet = walletOpt.get();
         BigDecimal currentAmount = wallet.getAmmount();
-        if (TypeEnum.GET.equals(operationEnum)){
+        if (TypeEnum.GET.equals(operationEnum)) {
             if (currentAmount.compareTo(transferInformation.getAmount()) < 0) {
                 throw new NotEnoughtMoneyException();
             }
@@ -44,7 +44,7 @@ public class MoneyOperationServiceImpl implements MoneyOperationService {
         }
         walletRepository.save(wallet);
 
-        NotificationUtil.createNotification(new Notification()
+        service.createNotification(new Notification()
                 .setType(operationEnum)
                 .setId(wallet.getUser().getId())
                 .setContent(transferInformation.getAmount().toPlainString()));
